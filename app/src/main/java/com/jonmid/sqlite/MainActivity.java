@@ -1,5 +1,6 @@
 package com.jonmid.sqlite;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,33 +29,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         create = (Button) findViewById(R.id.id_btn_create);
         listbtn = (Button) findViewById(R.id.id_btn_list);
         lista = (ListView) findViewById(R.id.id_lv_mylist);
         dataUser = new DataUser(this);
         dataUser.open();
 
-        create.setOnClickListener(new View.OnClickListener() {
+        /*create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createData();
             }
-        });
+        });*/
 
-        listbtn.setOnClickListener(new View.OnClickListener() {
+        /*listbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userList = dataUser.findAll();
                 adapterUser = new AdapterUser(getApplicationContext(), userList);
                 lista.setAdapter(adapterUser);
             }
-        });
+        });*/
+
+        userList = dataUser.findAll();
+        adapterUser = new AdapterUser(getApplicationContext(), userList);
+        lista.setAdapter(adapterUser);
     }
 
-    private void createData(){
+    /*private void createData(){
         User user = new User();
         user.setName("jonmid");
         user.setEmail("jamideros@hotmail.com");
         dataUser.create(user);
+    }*/
+
+    public void onShowAccount(View view){
+        Intent intent = new Intent(this, CreateUserActivity.class);
+        startActivity(intent);
     }
 }
